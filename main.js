@@ -22,6 +22,7 @@ function addBookToLibrary(book) {
   const h2 = document.createElement('h2');
   const h3 = document.createElement('h3');
   const removeBtn = document.createElement('button');
+  removeBtn.classList.add('remove');
   h2.textContent = book.title;
   h2.classList.add('book-title');
   h3.textContent = book.author;
@@ -33,16 +34,15 @@ function addBookToLibrary(book) {
   bookDiv.appendChild(removeBtn);
   container.appendChild(bookDiv);
 }
-
 function displayBooks() {
   myBooks.forEach(element => {
     addBookToLibrary(element)
   })
 }
 
-// function removeBook(book) {
-//   return myBooks.filter(b => b !== book);
-// }
+function removeBook(book) {
+  return myBooks.filter(b => b !== book);
+}
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -54,3 +54,11 @@ form.addEventListener('submit', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', displayBooks);
+container.addEventListener('click',(r) => {
+    if(r.target.classList.contains('remove')){
+    r.target.parentElement.remove();
+    }
+    myBooks.filter((b) => {
+        r.target.textContent !== b.title
+    })
+});
